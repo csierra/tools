@@ -56,8 +56,7 @@ def searchDirForModules(path, includeSublevels):
         if os.path.isdir(path_entry):
             modules[entry] = path_entry
             if includeSublevels:
-                subModules = searchDirForModules(path_entry, False)
-                modules = ChainMap({}, modules, subModules)
+                modules.update(searchDirForModules(path_entry, False))
 
     return modules
 
@@ -67,8 +66,7 @@ def getModules():
     allModules = {}
 
     for key, value in module_paths.items():
-        modules = searchDirForModules(portal_home + value['path'], value['includeSublevels'])
-        allModules = ChainMap({}, allModules, modules)
+        allModules.update(searchDirForModules(portal_home + value['path'], value['includeSublevels']))
 
     return allModules
 
