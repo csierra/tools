@@ -65,7 +65,7 @@ def getModules():
 
     allModules = {}
 
-    for key, value in module_paths.items():
+    for value in module_paths.values():
         allModules.update(searchDirForModules(portal_home + value['path'], value['includeSublevels']))
 
     return allModules
